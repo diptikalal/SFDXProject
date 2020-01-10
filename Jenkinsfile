@@ -34,15 +34,8 @@ node('master') {
             }
             if (rc != 0) { error 'hub org authorization failed' }
 	}
-
-	
-	    stage('log out') {
-    		cleanup {
-        		cleanWs()
-   		}	
-   		 always {
-			rc = sh returnStatus: true, script: "${toolbelt}/sfdx  force:auth:logout -u ${HUB_ORG} -p"
-    		}
-	    }	
+	 stage('log out') {
+		rc = sh returnStatus: true, script: "${toolbelt}/sfdx  force:auth:logout -u ${HUB_ORG} -p"
+	  }	
     }
 }
